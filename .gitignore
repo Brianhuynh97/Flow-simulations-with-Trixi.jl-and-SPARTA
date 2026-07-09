@@ -1,0 +1,6 @@
+.julia_depot/
+external/
+out/
+figures/.plot_cache/
+__pycache__/
+*.pyc
