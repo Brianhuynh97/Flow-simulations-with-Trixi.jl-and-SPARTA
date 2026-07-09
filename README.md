@@ -1,6 +1,6 @@
 # Project 03: Couette Flow with Trixi.jl and SPARTA
 
-This repository turns the assignment into a reproducible command-line project. It contains:
+This project contains:
 
 - a physical-parameter calculator for the argon Couette setup
 - a configurable Trixi.jl Navier-Stokes simulation file in scaled variables
@@ -8,9 +8,7 @@ This repository turns the assignment into a reproducible command-line project. I
 - a dependency-free SPARTA grid-dump exporter that writes ParaView-readable VTK files
 - a SPARTA runbook and input-deck placeholders for the DSMC half of the assignment
 
-The local environment used to prepare this repo can build the Julia environment, but it cannot run `Trixi.jl` end-to-end inside the Codex sandbox because MPI socket initialization is blocked. A local serial SPARTA binary is vendored in `external/sparta-src/src/spa_mac`, and the `Kn = 1e-2` DSMC comparison case has been run successfully from this repo.
-
-## Assignment Setup
+## Setup
 
 - Channel width: `L = 0.01 m`
 - Wall temperature: `T_w = 300 K`
@@ -36,18 +34,6 @@ Useful derived values for `Kn = 1e-3`:
 | centerline temperature rise estimate | `1.440627e+03 K` |
 
 The large temperature rise is expected here because the imposed wall speed is strongly supersonic with respect to the argon sound speed at `300 K`.
-
-## Repository Layout
-
-- [`trixi/elixir_couette_argon.jl`](/Users/brianhuynh/Project03_MSSD/trixi/elixir_couette_argon.jl): Trixi setup for the scaled Navier-Stokes simulation
-- [`scripts/argon_couette_params.py`](/Users/brianhuynh/Project03_MSSD/scripts/argon_couette_params.py): computes density, pressure, viscosity, conductivity, Reynolds/Peclet estimates
-- [`sparta/workflow.py`](/Users/brianhuynh/Project03_MSSD/sparta/workflow.py): single SPARTA entry point for recommendations, case generation, running, VTK export, and plotting
-- [`scripts/extract_trixi_profile.jl`](/Users/brianhuynh/Project03_MSSD/scripts/extract_trixi_profile.jl): extracts a 1D line-profile CSV directly from Trixi HDF5 output
-- [`scripts/plot_profiles.py`](/Users/brianhuynh/Project03_MSSD/scripts/plot_profiles.py): plots temperature and velocity-deviation profiles from extracted or ParaView-exported CSV files
-- [`sparta/workflow.py`](/Users/brianhuynh/Project03_MSSD/sparta/workflow.py): SPARTA entry point compatible with the documented `make sparta-*` workflow
-- [`docs/run-results.md`](/Users/brianhuynh/Project03_MSSD/docs/run-results.md): completed run record and generated ParaView inputs from this repo
-- [`docs/continuum-sweep-results.md`](/Users/brianhuynh/Project03_MSSD/docs/continuum-sweep-results.md): Trixi stability sweep and continuum breakdown summary
-- [`Makefile`](/Users/brianhuynh/Project03_MSSD/Makefile): convenience commands
 
 ## Quick Start
 
@@ -159,5 +145,3 @@ The assignment asks specifically why the continuum solution can oscillate or cra
 - SPARTA runs:
   - `Kn = 1e-3` smoke case completed for 200 steps in `runs/sparta_smoke_kn1e-3/`
   - `Kn = 1e-2` production case completed on `2026-07-08` in `runs/sparta_kn1e-2/`
-
-The remaining project work is now mostly report assembly and figure generation from the stored Trixi and SPARTA outputs.
